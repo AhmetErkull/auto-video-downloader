@@ -9,7 +9,8 @@ rss_url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC0XZpoAPTm_1UJvF
 title_prefix = "Müge Anlı ile Tatlı Sert |"
 season_suffix = "- 18. Sezon"
 
-downloaded_file = "downloaded_videos.txt"
+downloaded_file = r"D:\yt-download\downloaded_videos.txt"
+
 
 try:
     with open(downloaded_file, "r", encoding="utf-8") as f:
@@ -31,10 +32,10 @@ def check_and_download():
                 print(f"Yeni video bulundu: {title}")
                 
                 subprocess.run([
-                    "yt-dlp.exe",
+                    r"D:\yt-download\yt-dlp.exe",
                     "-f", "bv*+ba[ext=m4a]/b",
                     "--merge-output-format", "mp4",
-                    "-o", "D:/movies/%(title)s.%(ext)s",
+                    "-o", r"D:\movies\%(title)s.%(ext)s",
                     link
                 ])
                 
