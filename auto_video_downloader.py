@@ -8,7 +8,7 @@ config_file = "config.txt"
 
 try:
     with open(config_file, "r", encoding="utf-8") as f:
-        config = {key: value for key, value in (line.split(":") for line in f.readlines())}
+        config = {key.strip(): value.strip() for key, value in (line.split(":") for line in f.readlines())}
 except FileNotFoundError:
     print("There is no config file exist.")
 
@@ -16,12 +16,12 @@ except FileNotFoundError:
 channel_id = config["channel_id"]
 rss_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
 
-title_prefix = config["title_prefix"].strip()
-title_contains = config["title_contains"].strip()
-title_postfix =  config["title_postfix"].strip()
+title_prefix = config["title_prefix"]
+title_contains = config["title_contains"]
+title_postfix =  config["title_postfix"]
 delay = int(config["delay"])
 
-print(f'\nChannel ID: {channel_id}\nTitle: "{title_prefix}" .. "{title_contains}" .. "{title_postfix}"\n\ndelay: {delay} seconds ({delay/3600} hours)', end="\n\n")
+print(f'\nChannel ID: {channel_id}\nTitle: "{title_prefix}" .. "{title_contains}" .. "{title_postfix}"\n\nDelay: {delay} seconds ({delay/3600} hours)', end="\n\n")
 
 downloaded_file = "downloaded_videos.txt"
 
@@ -40,10 +40,10 @@ def check_and_download():
         link = entry.find('{http://www.w3.org/2005/Atom}link').attrib['href']
 
         if not title.startswith(title_prefix) and not title_contains in title and not title.endswith(title_postfix):
-            break
+            continue
         
         if title in downloaded_titles:
-                print(f"Video already has been downloaded: {title}")
+                print(f"The video has already been downloaded: {title}")
                 break
 
         print(f"New video found: {title}")
@@ -62,11 +62,11 @@ def check_and_download():
         downloaded_titles.add(title)
 
 while True:
-    print(f"{datetime.now()}: Providing control...")
+    print(f"{datetime.now()}: Checking for new videos...")
     try:
         check_and_download()
     except Exception as e:
-        print("Error occured:", e)
+        print("Error occurred:", e)
     
     time.sleep(delay)
 
