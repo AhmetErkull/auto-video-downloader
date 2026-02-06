@@ -4,9 +4,6 @@ import subprocess
 import time
 from datetime import datetime
 
-
-# UC0XZpoAPTm_1UJvFQiVg_hg
-
 config_file = "config.txt"
 
 try:
