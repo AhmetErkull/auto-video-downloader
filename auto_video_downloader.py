@@ -39,7 +39,7 @@ def check_and_download():
         title = entry.find('{http://www.w3.org/2005/Atom}title').text
         link = entry.find('{http://www.w3.org/2005/Atom}link').attrib['href']
 
-        if not title.startswith(title_prefix) and not title_contains in title and not title.endswith(title_postfix):
+        if title.startswith(title_prefix) and title_contains in title and title.endswith(title_postfix):
             continue
         
         if title in downloaded_titles:
