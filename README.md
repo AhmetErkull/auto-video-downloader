@@ -30,8 +30,6 @@ FFmpeg is used in this project to process video/audio streams efficiently. By in
 
 1. Place the `yt-dlp.exe` and `ffmpeg-2025-09-28-git-0fdb5829e3-full_build` files in the same directory as your Auto Video Downloader script.
 2. Run your script to download and process videos.
-3. Make sure to respect platform terms and copyright laws when downloading content.
-
 ---
 
 ## License
